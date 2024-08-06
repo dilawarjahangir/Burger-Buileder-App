@@ -2,8 +2,8 @@ import React from "react";
 import "../../App.css"
 const BurgerAnimation = () => {
   return (
-    <div classNameName="h-[450px] w-full flex justify-center items-start">
-      <div className="w-full flex flex-col justify-center items-center pt-10">
+  
+      <div className="w-full h-[431px] flex flex-col justify-start    items-center pt-10">
           <div className="relative m-1 w-[360px] h-[80px] bg-gradient-to-r from-[#e36f09] to-[#9f5603] custom-rounded">
             <div className="absolute top-2/4 left-5 w-7 h-3 bg-white rounded-full transform rotate-12"></div>
             <div className="absolute top-1/3 left-1/3 w-7 h-3 bg-white rounded-full transform rotate-12"></div>
@@ -17,7 +17,7 @@ const BurgerAnimation = () => {
           <div class="w-[360px] m-1 h-[32px] bg-[#703B09] lettuce-rounded  text-transparent" >.</div>
           <div class="w-[360px] m-1 h-[52px] bg-[#de752f] close-rounded  text-transparent" >.</div>
         </div>
-    </div>
+
   );
 };
 

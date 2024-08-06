@@ -9,6 +9,7 @@ const HomePage = () => {
        <Header active={1}/>
        <BurgerAnimation/>
        <BurgerMaking/>
+       
     </div>
   )
 }
