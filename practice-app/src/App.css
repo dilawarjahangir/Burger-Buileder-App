@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-rounded {
+  border-radius: 50% 50% 0 0;
+}
+
+.lettuce-rounded{
+  border-radius: 20px;
+}
+.close-rounded{
+  border-radius: 0 0 30px 30px;
+}
