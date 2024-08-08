@@ -1,11 +1,28 @@
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { server } from "../../server";
 
 const Header = ({ active }) => {
-
-
-
+  const { isAuthenticated } = useSelector((state) => state.user);
+  console.log(isAuthenticated);
+  const navigate =useNavigate()
+  const logoutHandler = () => {
+    axios
+      .get(`${server}/user/logout`, { withCredentials: true })
+      .then((res) => {
+        // toast.success(res.data.message);
+        window.location.reload(true);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  };
   return (
+
+
     <>
       <div className="h-[56px] px-5  bg-[#703B09] flex justify-between items-center ">
         <div className="p-2 bg-white  rounded-md cursor-pointer">
@@ -18,23 +35,49 @@ const Header = ({ active }) => {
         </div>
         <div className="flex h-full items-center justify-center text-center">
           <Link
-            className={` ${active===1?"bg-[#8F5C2C] border-b-4 border-[#40A4C8]":""} text-white cursor-pointer h-full hover:bg-[#8F5C2C] hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
+            className={` ${
+              active === 1 ? "bg-[#8F5C2C] border-b-4 border-[#40A4C8]" : ""
+            } text-white cursor-pointer h-full hover:bg-[#8F5C2C] hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
             to="/"
           >
             Burger Builder
           </Link>
-          <Link
-            className={` ${active===2?"bg-[#8F5C2C]  border-b-4 border-[#40A4C8]":""} text-white cursor-pointer h-full hover:bg-[#8F5C2C]  hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
-            to="/order"
-          >
-            Orders
-          </Link>
-          <Link
-            className={` ${active===3?"bg-[#8F5C2C]  border-b-4 border-[#40A4C8]":""} text-white cursor-pointer h-full hover:bg-[#8F5C2C]  hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
-            to="/login"
-          >
-            Login
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              className={` ${
+                active === 2 ? "bg-[#8F5C2C]  border-b-4 border-[#40A4C8]" : ""
+              } text-white cursor-pointer h-full hover:bg-[#8F5C2C]  hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
+              to="/order"
+            >
+              Orders
+            </Link>
+          ) : (
+            ""
+          )}
+          {isAuthenticated ? (
+            <>
+              <Link onClick={logoutHandler}
+                className={` ${
+                  active === 3
+                    ? "bg-[#8F5C2C]  border-b-4 border-[#40A4C8]"
+                    : ""
+                } text-white cursor-pointer h-full hover:bg-[#8F5C2C]  hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
+                to="/login"
+              >
+                
+                Log Out
+              </Link>
+            </>
+          ) : (
+            <Link
+              className={` ${
+                active === 3 ? "bg-[#8F5C2C]  border-b-4 border-[#40A4C8]" : ""
+              } text-white cursor-pointer h-full hover:bg-[#8F5C2C]  hover:border-b-4 hover:border-[#40A4C8] flex items-center justify-center px-3 `}
+              to="/login"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </>
